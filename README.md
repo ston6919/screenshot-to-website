@@ -1,4 +1,6 @@
-# screenshot-to-code
+# screenshot-to-website
+
+> This is a fork of [abi/screenshot-to-code](https://github.com/abi/screenshot-to-code) by [Abi Raja](https://twitter.com/_abi_) — all credit for the original app goes to them. This fork adds a no-API-key generation path (see [Run it with no API key](#run-it-with-no-api-key) below); everything else is unchanged. For the official hosted product, support, and upstream development, go to the original repo.
 
 Convert screenshots, mockups, Figma designs, and screen recordings into clean, functional code using AI. The easiest way to try this is using <a href="https://screenshottocode.com/?utm_source=github&utm_medium=readme&utm_campaign=oss_readme&utm_content=top_cta" target="_blank" rel="noopener noreferrer">the official, hosted product at screenshottocode.com →</a>
 
@@ -55,6 +57,20 @@ the best results and lets you compare multiple models per generation.
 
 With more keys, the app automatically picks a stronger mix of models per
 variant; with a single key it uses that provider's models only.
+
+### Run it with no API key
+
+If none of the three keys above are set, this fork falls back to generating
+through your local [Claude Code](https://claude.com/claude-code) CLI
+(`claude -p`) instead of a metered API key — it authenticates with however
+you're already logged into `claude`, not a separate ANTHROPIC_API_KEY. Just
+have `claude` installed and logged in, then run the app with no `.env` keys
+configured.
+
+This path is single-shot only: no image generation, asset extraction, or
+screenshot-preview tools, since those are wired to the app's own API-based
+tool-calling and don't exist in Claude Code's toolset. Add a provider key any
+time to get the full agent experience back.
 
 If you'd like to run the app with Ollama open-source models (not recommended due to poor-quality results), [follow this comment](https://github.com/abi/screenshot-to-code/issues/354#issuecomment-2435479853).
 
