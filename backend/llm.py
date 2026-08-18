@@ -54,6 +54,8 @@ class Llm(Enum):
     GEMINI_3_6_FLASH_MEDIUM = "gemini-3.6-flash (medium thinking)"
     GEMINI_3_6_FLASH_LOW = "gemini-3.6-flash (low thinking)"
     GEMINI_3_6_FLASH_MINIMAL = "gemini-3.6-flash (minimal thinking)"
+    # Local CLI (no API key; runs through the `claude` CLI's own login)
+    CLAUDE_CODE_CLI = "claude-code-cli (local)"
 
 
 class Completion(TypedDict):
@@ -115,12 +117,15 @@ MODEL_PROVIDER: dict[Llm, str] = {
     Llm.GEMINI_3_6_FLASH_MEDIUM: "gemini",
     Llm.GEMINI_3_6_FLASH_LOW: "gemini",
     Llm.GEMINI_3_6_FLASH_MINIMAL: "gemini",
+    # Local CLI
+    Llm.CLAUDE_CODE_CLI: "cli",
 }
 
 # Convenience sets for membership checks
 OPENAI_MODELS = {m for m, p in MODEL_PROVIDER.items() if p == "openai"}
 ANTHROPIC_MODELS = {m for m, p in MODEL_PROVIDER.items() if p == "anthropic"}
 GEMINI_MODELS = {m for m, p in MODEL_PROVIDER.items() if p == "gemini"}
+CLI_MODELS = {m for m, p in MODEL_PROVIDER.items() if p == "cli"}
 
 OPENAI_MODEL_CONFIG: dict[Llm, dict[str, str]] = {
     Llm.GPT_5_4_MINI_LOW: {"api_name": "gpt-5.4-mini", "reasoning_effort": "low"},

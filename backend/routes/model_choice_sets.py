@@ -74,3 +74,6 @@ OPENAI_ONLY_MODELS = (
     Llm.GPT_5_5_HIGH,
     Llm.GPT_5_5_LOW,
 )
+
+# No API key configured: fall back to the local `claude` CLI.
+NO_KEY_MODELS = (Llm.CLAUDE_CODE_CLI,)

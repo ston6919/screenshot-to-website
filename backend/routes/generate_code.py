@@ -71,6 +71,7 @@ from routes.model_choice_sets import (
     GEMINI_ANTHROPIC_MODELS,
     GEMINI_OPENAI_MODELS,
     GEMINI_ONLY_MODELS,
+    NO_KEY_MODELS,
     OPENAI_ANTHROPIC_MODELS,
     OPENAI_ONLY_MODELS,
     VIDEO_VARIANT_MODELS,
@@ -489,7 +490,7 @@ class ModelSelectionStage:
         elif openai_api_key:
             models = list(OPENAI_ONLY_MODELS)
         else:
-            raise Exception("No OpenAI or Anthropic key")
+            models = list(NO_KEY_MODELS)
 
         # Cycle through models: [A, B] with num=5 becomes [A, B, A, B, A]
         selected_models: List[Llm] = []

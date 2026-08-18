@@ -212,13 +212,13 @@ class TestModelSelectionNoKeys:
         self.model_selector = ModelSelectionStage(mock_throw_error)
 
     @pytest.mark.asyncio
-    async def test_no_keys_raises_error(self):
-        """No keys: Should raise an exception"""
-        with pytest.raises(Exception, match="No API key"):
-            await self.model_selector.select_models(
-                generation_type="create",
-                input_mode="text",
-                openai_api_key=None,
-                anthropic_api_key=None,
-                gemini_api_key=None,
-            )
+    async def test_no_keys_falls_back_to_cli(self):
+        """No keys: Should fall back to the local CLI model, not raise."""
+        models = await self.model_selector.select_models(
+            generation_type="create",
+            input_mode="text",
+            openai_api_key=None,
+            anthropic_api_key=None,
+            gemini_api_key=None,
+        )
+        assert models == [Llm.CLAUDE_CODE_CLI] * 4
